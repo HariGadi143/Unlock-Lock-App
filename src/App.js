@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import styles from "./App.module.css";
 
-function App() {
+const App = () => {
+  const [lockState, setLockState] = useState(true);
+
+  const handleLockState = () => {
+    setLockState(!lockState);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div className={styles.mainContainer}>
+      <div className={styles.lockContainer}>
+        <img
+          src={
+            lockState
+              ? "https://assets.ccbp.in/frontend/hooks/lock-img.png"
+              : "https://assets.ccbp.in/frontend/hooks/unlock-img.png"
+          }
+          alt={lockState ? "unlock_img" : "lock_img"}
+          className={styles.lockImg}
+        />
+        <p className={styles.lockText}>
+          {lockState ? "Your Device is Locked" : "Your Device is Unlocked"}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <button className={styles.btnText} onClick={handleLockState}>
+          {lockState ? "Unlock" : "Lock"}
+        </button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
